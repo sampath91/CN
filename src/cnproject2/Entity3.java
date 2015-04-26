@@ -1,5 +1,8 @@
 package cnproject2;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Entity3 extends Entity
 {    
 	
@@ -13,7 +16,9 @@ public class Entity3 extends Entity
 
 	private int[] dtvector = new int[] { 7, 999, 2, 0 };
 	
-	
+	Date dNow = new Date();
+    SimpleDateFormat ft = 
+    new SimpleDateFormat ("HH:mm:ss:SS");
 	
     // Perform any necessary initialization in the constructor
     public Entity3()
@@ -21,7 +26,7 @@ public class Entity3 extends Entity
     	
     	int i, j;
 		System.out.println("Entity3 is called at t = "
-				+ System.currentTimeMillis());
+				+ ft.format(dNow));
 
 		/*
 		 * Initialize the distance table, distance table of node 0 looks like
@@ -61,7 +66,7 @@ public class Entity3 extends Entity
     {
     	
     	System.out.println("rtupdate3 is called at t= "
-				+ System.currentTimeMillis());
+				+ ft.format(dNow));
 		System.out.println("node 3 is receiving packet from node "
 				+ p.getSource());
 		int i, j;
@@ -93,7 +98,7 @@ public class Entity3 extends Entity
 						temp[j] = dtvector[j];
 					}
 					p = new Packet(3, i, temp);
-					System.out.println("Packet is being sent to node " + i
+					System.out.println("Due to vector change, Packet is being sent to node " + i
 							+ " from Node 3.");
 					NetworkSimulator.toLayer2(p);
 				}

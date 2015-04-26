@@ -1,5 +1,8 @@
 package cnproject2;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Entity0 extends Entity {
 
 	//
@@ -12,18 +15,26 @@ public class Entity0 extends Entity {
 	private int[] dtcost = new int[] { 0, 1, 3, 7 };
 
 	private int[] dtvector = new int[] { 0, 1, 3, 7 };
+	
+	Date dNow = new Date();
+    SimpleDateFormat ft = 
+    new SimpleDateFormat ("HH:mm:ss:SS");
 
 	// Perform any necessary initialization in the constructor
 
 	public Entity0() {
 		int i, j;
 		System.out.println("Entity0 is called at t = "
-				+ System.currentTimeMillis());
+				+ ft.format(dNow));
 
 		/*
 		 * Initialize the distance table, distance table of node 0 looks like
-		 * this: 0 1 2 3 0 0 999 999 999 1 999 1 999 999 2 999 999 3 999 3 999
-		 * 999 999 7
+		 * this: 
+		 * 	 0 	 1   2   3
+		 * 0 0 	 999 999 999 
+		 * 1 999 1   999 999 
+		 * 2 999 999 3   999 
+		 * 3 999 999 999 7
 		 */
 
 		for (i = 0; i < NetworkSimulator.NUMENTITIES; i++) {
@@ -57,7 +68,7 @@ public class Entity0 extends Entity {
 
 	public void update(Packet p) {
 		System.out.println("rtupdate0 is called at t= "
-				+ System.currentTimeMillis());
+				+ ft.format(dNow));
 		System.out.println("node 0 is receiving packet from node "
 				+ p.getSource());
 		int i, j;
@@ -90,7 +101,7 @@ public class Entity0 extends Entity {
 						temp[j] = dtvector[j];
 					}
 					p = new Packet(0, i, temp);
-					System.out.println("Packet is being sent to node " + i
+					System.out.println("Due to vector change, Packet is being sent to node " + i
 							+ " from Node 0.");
 					NetworkSimulator.toLayer2(p);
 				}
